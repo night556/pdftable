@@ -26,6 +26,12 @@ type Table struct {
 }
 
 func NewTable(config *TableConfig) *Table {
+	if config.DefaultFontSize == 0 {
+		panic("need DefaultFontSize")
+	}
+	if config.Pdf == nil {
+		panic("need Pdf")
+	}
 	return &Table{
 		config: config,
 	}
@@ -61,6 +67,7 @@ func (t *Table) AddRowData(r *RowData, config *TableConfig) {
 }
 
 func (t *Table) Draw() error {
+	t.config.Pdf.SetFontSize(t.config.DefaultFontSize)
 	if t.config.HeadsW == nil {
 		return errors.New("unspecified column width")
 	}
