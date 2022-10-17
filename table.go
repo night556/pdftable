@@ -2,6 +2,7 @@ package pdftable
 
 import (
 	"errors"
+	"fmt"
 	"math"
 
 	"github.com/signintech/gopdf"
@@ -149,7 +150,7 @@ func (r *RowData) Draw(sx float64, sy float64, minhigh float64, currentIndex int
 		// 开始绘制子行
 		for i, v := range r.subTableData {
 			// 绘制
-			h, pageBreak, splitSubR := v.Draw(X, Y, minhigh, currentIndex+len(r.Value))
+			h, pageBreak, splitSubR := v.Draw(X, Y, minHigh, currentIndex+len(r.Value))
 			// 更新下一子行画笔位置 - Y
 			Y += h
 
@@ -168,8 +169,12 @@ func (r *RowData) Draw(sx float64, sy float64, minhigh float64, currentIndex int
 			}
 		}
 	}
+	for _, v := range r.Value {
+		if v == "234313287" {
+			fmt.Println("======", minHigh, Y-sy)
+		}
+	}
 	minDrawHigh = math.Max(minHigh, Y-sy)
-
 	// 正常绘制
 	r.config.Pdf.SetX(sx)
 	r.config.Pdf.SetY(sy)
