@@ -2,7 +2,6 @@ package pdftable
 
 import (
 	"errors"
-	"fmt"
 	"math"
 
 	"github.com/signintech/gopdf"
@@ -167,11 +166,6 @@ func (r *RowData) Draw(sx float64, sy float64, minhigh float64, currentIndex int
 				splitR.subTableData = append(splitR.subTableData, r.subTableData[i:]...)
 				break
 			}
-		}
-	}
-	for _, v := range r.Value {
-		if v == "234313287" {
-			fmt.Println("======", minHigh, Y-sy)
 		}
 	}
 	minDrawHigh = math.Max(minHigh, Y-sy)
