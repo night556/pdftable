@@ -163,10 +163,12 @@ func (r *RowData) Draw(sx float64, sy float64, minhigh float64, currentIndex int
 				if splitSubR != nil {
 					splitR.subTableData = append(splitR.subTableData, splitSubR)
 				}
-				if i+1 < len(r.subTableData) {
-					i = i + 1
+				if h == 0 {
+					splitR.subTableData = append(splitR.subTableData, r.subTableData[i])
 				}
-				splitR.subTableData = append(splitR.subTableData, r.subTableData[i:]...)
+				if i+1 < len(r.subTableData) {
+					splitR.subTableData = append(splitR.subTableData, r.subTableData[i+1:]...)
+				}
 				break
 			}
 		}
